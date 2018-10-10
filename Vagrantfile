@@ -9,9 +9,11 @@ Vagrant.configure("2") do |config|
     
   config.vm.provision "docker" do |d|
     d.build_image "/vagrant/docker"
-    d.ports "2033:22"
+    # ports format: ["vagratn-vm:container"]
+    d.ports ["2033:22"]
   end
   
+  # map host OS port 22 to vm port 2033
   config.vm.network "forwarded_port",
-    guest: 2033, host: 22
+    host: 22, guest: 2033
 end
